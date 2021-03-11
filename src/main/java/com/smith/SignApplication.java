@@ -59,7 +59,8 @@ public class SignApplication {
         parameters.add(new BasicNameValuePair("account", account[0]));
         parameters.add(new BasicNameValuePair("pass", account[1]));
 
-        JSONObject loginRes = Request.post(LOGIN + new Date().getTime(),
+
+        JSONObject loginRes = Request.post(LOGIN + System.currentTimeMillis(),
                 parameters.toString());
         LOGGER.info("登录结果：{}", loginRes);
 
@@ -68,10 +69,12 @@ public class SignApplication {
             JSONObject signRes = Request.get(SIGN, token);
             LOGGER.info("签到结果：{}", signRes);
             stringBuilder.append("账号" + account[0] + "登录成功");
+            stringBuilder.append("\r\n");
             stringBuilder.append("签到结果" + signRes);
             stringBuilder.append("\r\n");
         } else {
             stringBuilder.append("账号" + account[0] + "登录失败");
+            stringBuilder.append("\r\n");
             stringBuilder.append("失败原因" + loginRes);
             stringBuilder.append("\r\n");
         }
@@ -94,7 +97,7 @@ public class SignApplication {
 
 //        String body = "desp:" + stringBuilder.toString();
 
-        String body = "title=签到结果"+"&desp="+stringBuilder.toString();
+        String body = "title=签到结果" + "&desp=" + stringBuilder.toString();
         StringEntity entityBody = new StringEntity(body, "UTF-8");
         HttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost("https://sctapi.ftqq.com/" + sckey + ".send");
