@@ -76,7 +76,7 @@ public class Request {
         HttpClient client = HttpClients.custom().setDefaultRequestConfig(defaultConfig).build();
         HttpPost httpPost = new HttpPost(url);
         httpPost.addHeader("connection","keep-alive");
-        httpPost.addHeader("Host","www.bigan.net");
+//        httpPost.addHeader("Host","www.bigan.net");
         httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
         httpPost.addHeader("charset","UTF-8");
         httpPost.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36");
