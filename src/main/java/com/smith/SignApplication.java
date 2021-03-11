@@ -43,7 +43,7 @@ public class SignApplication {
         String[] accountList = accountStrList.split("\\|");
         SignApplication signApplication = new SignApplication();
         for (String s : accountList) {
-//            LOGGER.info("当前签到用户：{}", s);
+
             signApplication.sign(s, LOGIN, SIGN);
         }
         signApplication.send(sckey);
@@ -59,7 +59,7 @@ public class SignApplication {
         parameters.add(new BasicNameValuePair("account", account[0]));
         parameters.add(new BasicNameValuePair("pass", account[1]));
 
-
+        LOGGER.info("当前时间戳：{}",System.currentTimeMillis());
         JSONObject loginRes = Request.post(LOGIN + System.currentTimeMillis(),
                 parameters.toString());
         LOGGER.info("登录结果：{}", loginRes);
@@ -68,6 +68,7 @@ public class SignApplication {
             String token = loginRes.getString("tk");
             JSONObject signRes = Request.get(SIGN, token);
             LOGGER.info("签到结果：{}", signRes);
+            stringBuilder.append("\r\n");
             stringBuilder.append("账号" + account[0] + "登录成功");
             stringBuilder.append("\r\n");
             stringBuilder.append("签到结果" + signRes);
@@ -90,12 +91,6 @@ public class SignApplication {
      */
     public void send(String sckey) {
         /** 将要推送的数据 */
-//        String text = "总: " + followNum + " - ";
-//        text += "成功: " + success.size() + " 失败: " + (followNum - success.size());
-//        String desp = "共 " + followNum + " 贴吧\n\n";
-//        desp += "成功: " + success.size() + " 失败: " + (followNum - success.size());
-
-//        String body = "desp:" + stringBuilder.toString();
 
         String body = "title=签到结果" + "&desp=" + stringBuilder.toString();
         StringEntity entityBody = new StringEntity(body, "UTF-8");
