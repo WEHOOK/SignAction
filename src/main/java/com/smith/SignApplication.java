@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SignApplication {
@@ -58,7 +59,7 @@ public class SignApplication {
         parameters.add(new BasicNameValuePair("account", account[0]));
         parameters.add(new BasicNameValuePair("pass", account[1]));
 
-        JSONObject loginRes = Request.post(LOGIN + System.currentTimeMillis(),
+        JSONObject loginRes = Request.post(LOGIN + new Date().getTime(),
                 parameters.toString());
         LOGGER.info("登录结果：{}", loginRes);
 
