@@ -41,7 +41,7 @@ public class SignApplication {
         // 通过|分隔，获取每个账户
         String[] accountList = accountStrList.split("\\|");
         for (String s : accountList) {
-            LOGGER.info("当前签到用户：{}", s);
+//            LOGGER.info("当前签到用户：{}", s);
             SignApplication signApplication = new SignApplication();
             signApplication.sign(s, LOGIN, SIGN);
             signApplication.send(sckey);

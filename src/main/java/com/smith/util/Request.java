@@ -38,9 +38,9 @@ public class Request {
         HttpClient client = HttpClients.custom().setDefaultRequestConfig(defaultConfig).build();
 
         HttpGet httpGet = new HttpGet(url);
-//        httpGet.addHeader("connection","keep-alive");
-//        httpGet.addHeader("Content-Type","application/x-www-form-urlencoded");
-//        httpGet.addHeader("charset","UTF-8");
+        httpGet.addHeader("connection","keep-alive");
+        httpGet.addHeader("Content-Type","application/x-www-form-urlencoded");
+        httpGet.addHeader("charset","UTF-8");
         httpGet.setHeader("BIGAN_LOGIN_TOKEN", token);
         httpGet.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36");
 //        httpGet.addHeader("Cookie",cookie.getCookie());
@@ -75,10 +75,10 @@ public class Request {
         RequestConfig defaultConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
         HttpClient client = HttpClients.custom().setDefaultRequestConfig(defaultConfig).build();
         HttpPost httpPost = new HttpPost(url);
-//        httpPost.addHeader("connection","keep-alive");
-//        httpPost.addHeader("Host","tieba.baidu.com");
-//        httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
-//        httpPost.addHeader("charset","UTF-8");
+        httpPost.addHeader("connection","keep-alive");
+        httpPost.addHeader("Host","www.bigan.net");
+        httpPost.addHeader("Content-Type","application/x-www-form-urlencoded");
+        httpPost.addHeader("charset","UTF-8");
         httpPost.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36");
 //        httpPost.addHeader("Cookie",cookie.getCookie());
         httpPost.setEntity(entityBody);
