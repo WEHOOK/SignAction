@@ -71,7 +71,7 @@ public class SignApplication {
 
             JSONObject dataObject = JSONObject.parseObject(loginRes.getString("data"));
             String token = dataObject.getString(TOKEN);
-            LOGGER.info("token：{}", token);
+
             JSONObject signRes = Request.get(SIGN, token);
             LOGGER.info("签到结果：{}", signRes);
             stringBuilder.append("\r\n");
