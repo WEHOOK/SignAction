@@ -14,6 +14,7 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class SignApplication {
     private static final String STATUSCODE = "StatusCode";
     StringBuilder stringBuilder = new StringBuilder();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
 
         // 获取账户String
         String accountStrList = args[0];
@@ -50,7 +51,7 @@ public class SignApplication {
 
     }
 
-    public void sign(String s, String LOGIN, String SIGN) {
+    public void sign(String s, String LOGIN, String SIGN) throws UnsupportedEncodingException {
         // 通过，分隔获取账户用户名与密码
         String[] account = s.split(",");
         List<NameValuePair> parameters = new ArrayList<NameValuePair>(0);
@@ -61,7 +62,7 @@ public class SignApplication {
 
         LOGGER.info("当前时间戳：{}",System.currentTimeMillis());
         JSONObject loginRes = Request.post(LOGIN ,
-                parameters.toString());
+                parameters);
         LOGGER.info("登录结果：{}", loginRes);
 
         if (SUCCESSCODE.equals(loginRes.get(STATUSCODE))) {

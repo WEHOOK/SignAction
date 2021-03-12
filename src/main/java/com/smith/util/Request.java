@@ -5,6 +5,7 @@ import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -13,6 +14,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 
 /**
@@ -84,15 +88,14 @@ public class Request {
      * @author srcrs
      * @Time 2020-10-31
      */
-    public static JSONObject post(String url, String body) {
-        StringEntity entityBody = new StringEntity(body, "UTF-8");
+    public static JSONObject post(String url, List<NameValuePair> body) throws UnsupportedEncodingException {
+        UrlEncodedFormEntity entityBody = new UrlEncodedFormEntity(body, "UTF-8");
 //        RequestConfig defaultConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
 //        HttpClient client = HttpClients.custom().setDefaultRequestConfig(defaultConfig).build();
         CloseableHttpClient client = HttpClients.createDefault();
-//        HttpPost httpPost = new HttpPost(url + System.currentTimeMillis());
+        HttpPost httpPost = new HttpPost(url + System.currentTimeMillis());
 
-        HttpPost httpPost = new HttpPost("https://www.bigan.net/api/desktop/login/account?timeStamp=" + System.currentTimeMillis());
-        LOGGER.info("请求地址：{}", url+ System.currentTimeMillis());
+        LOGGER.info("请求地址：{}", url + System.currentTimeMillis());
         httpPost.addHeader("connection", "keep-alive");
 //        httpPost.addHeader("Host","www.bigan.net");
         httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
