@@ -89,7 +89,9 @@ public class Request {
 //        RequestConfig defaultConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
 //        HttpClient client = HttpClients.custom().setDefaultRequestConfig(defaultConfig).build();
         CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(url + System.currentTimeMillis());
+//        HttpPost httpPost = new HttpPost(url + System.currentTimeMillis());
+
+        HttpPost httpPost = new HttpPost("https://www.bigan.net/api/desktop/login/account?timeStamp=" + System.currentTimeMillis());
         LOGGER.info("请求地址：{}", url+ System.currentTimeMillis());
         httpPost.addHeader("connection", "keep-alive");
 //        httpPost.addHeader("Host","www.bigan.net");
