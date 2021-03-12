@@ -1,16 +1,13 @@
 package com.smith.util;
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.http.*;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,15 +45,9 @@ public class Request {
      * @author srcrs
      * @Time 2020-10-31
      */
-    public static JSONObject get(String url, String token,CloseableHttpClient client) {
-
-
+    public static JSONObject get(String url, String token, CloseableHttpClient client) {
 
         HttpGet httpGet = new HttpGet(url);
-//        LOGGER.info("请求地址：{}", url);
-//        httpGet.addHeader("connection", "keep-alive");
-//        httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
-//        httpGet.addHeader("charset", "UTF-8");
         LOGGER.info("token：{}", token);
         httpGet.setHeader("BIGAN_LOGIN_TOKEN", token);
         httpGet.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36");
@@ -72,7 +63,7 @@ public class Request {
             }
             respContent = EntityUtils.toString(entity, "UTF-8");
         } catch (Exception e) {
-            LOGGER.info("get请求错误 -- " + e);
+            LOGGER.info("get请求错误:{}", e.getMessage());
         } finally {
             return JSONObject.parseObject(respContent);
         }
@@ -87,11 +78,9 @@ public class Request {
      * @author srcrs
      * @Time 2020-10-31
      */
-    public static JSONObject post(String url, List<NameValuePair> body,CloseableHttpClient client) throws UnsupportedEncodingException {
+    public static JSONObject post(String url, List<NameValuePair> body, CloseableHttpClient client) throws UnsupportedEncodingException {
         UrlEncodedFormEntity entityBody = new UrlEncodedFormEntity(body, "UTF-8");
-//        CloseableHttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url + System.currentTimeMillis());
-        LOGGER.info("请求地址：{}", url + System.currentTimeMillis());
         httpPost.addHeader("connection", "keep-alive");
         httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
         httpPost.addHeader("charset", "UTF-8");
@@ -109,7 +98,7 @@ public class Request {
             }
             respContent = EntityUtils.toString(entity, "UTF-8");
         } catch (Exception e) {
-            LOGGER.info("post请求错误 -- " + e);
+            LOGGER.info("post请求错误:{}", e.getMessage());
         } finally {
             return JSONObject.parseObject(respContent);
         }

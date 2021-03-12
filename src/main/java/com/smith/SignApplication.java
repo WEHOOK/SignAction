@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class SignApplication {
@@ -67,15 +66,12 @@ public class SignApplication {
 
         JSONObject loginRes = Request.post(LOGIN,
                 parameters, client);
-        LOGGER.info("登录结果：{}", loginRes);
-
         if (SUCCESSCODE.equals(loginRes.get(STATUSCODE))) {
 
             JSONObject dataObject = JSONObject.parseObject(loginRes.getString("data"));
             String token = dataObject.getString(TOKEN);
 
             JSONObject signRes = Request.get(SIGN, token, client);
-            LOGGER.info("签到结果：{}", signRes);
             stringBuilder.append("\r\n");
             stringBuilder.append("账号" + account[0] + "登录成功");
             stringBuilder.append("\r\n");
@@ -120,7 +116,7 @@ public class SignApplication {
             respContent = EntityUtils.toString(entity, "UTF-8");
             LOGGER.info("server酱推送正常");
         } catch (Exception e) {
-            LOGGER.error("server酱发送失败 -- " + e);
+            LOGGER.error("server酱发送失败:{}", e.getMessage());
         }
     }
 
