@@ -49,8 +49,7 @@ public class Request {
      * @Time 2020-10-31
      */
     public static JSONObject get(String url, String token) {
-//        RequestConfig defaultConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
-//        HttpClient client = HttpClients.custom().setDefaultRequestConfig(defaultConfig).build();
+
         CloseableHttpClient client = HttpClients.createDefault();
 
         HttpGet httpGet = new HttpGet(url);
@@ -60,7 +59,6 @@ public class Request {
         httpGet.addHeader("charset", "UTF-8");
         httpGet.setHeader("BIGAN_LOGIN_TOKEN", token);
         httpGet.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36");
-//        httpGet.addHeader("Cookie",cookie.getCookie());
         HttpResponse resp = null;
         String respContent = null;
         try {
@@ -90,18 +88,13 @@ public class Request {
      */
     public static JSONObject post(String url, List<NameValuePair> body) throws UnsupportedEncodingException {
         UrlEncodedFormEntity entityBody = new UrlEncodedFormEntity(body, "UTF-8");
-//        RequestConfig defaultConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
-//        HttpClient client = HttpClients.custom().setDefaultRequestConfig(defaultConfig).build();
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url + System.currentTimeMillis());
-
         LOGGER.info("请求地址：{}", url + System.currentTimeMillis());
         httpPost.addHeader("connection", "keep-alive");
-//        httpPost.addHeader("Host","www.bigan.net");
         httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
         httpPost.addHeader("charset", "UTF-8");
         httpPost.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36");
-//        httpPost.addHeader("Cookie",cookie.getCookie());
         httpPost.setEntity(entityBody);
         HttpResponse resp = null;
         String respContent = null;

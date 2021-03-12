@@ -27,8 +27,8 @@ public class SignApplication {
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(SignApplication.class);
 
-    private static final Integer SUCCESSCODE = 200;
-    private static final String STATUSCODE = "StatusCode";
+    private static final Integer SUCCESSCODE = 0;
+    private static final String STATUSCODE = "code";
     StringBuilder stringBuilder = new StringBuilder();
 
     public static void main(String[] args) throws UnsupportedEncodingException {
@@ -60,7 +60,7 @@ public class SignApplication {
         parameters.add(new BasicNameValuePair("account", account[0]));
         parameters.add(new BasicNameValuePair("pass", account[1]));
 
-        LOGGER.info("当前时间戳：{}",System.currentTimeMillis());
+
         JSONObject loginRes = Request.post(LOGIN ,
                 parameters);
         LOGGER.info("登录结果：{}", loginRes);
@@ -75,6 +75,7 @@ public class SignApplication {
             stringBuilder.append("签到结果" + signRes);
             stringBuilder.append("\r\n");
         } else {
+            stringBuilder.append("\r\n");
             stringBuilder.append("账号" + account[0] + "登录失败");
             stringBuilder.append("\r\n");
             stringBuilder.append("失败原因" + loginRes);
