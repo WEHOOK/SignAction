@@ -61,12 +61,13 @@ public class SignApplication {
         parameters.add(new BasicNameValuePair("pass", account[1]));
 
 
-        JSONObject loginRes = Request.post(LOGIN ,
+        JSONObject loginRes = Request.post(LOGIN,
                 parameters);
         LOGGER.info("登录结果：{}", loginRes);
 
         if (SUCCESSCODE.equals(loginRes.get(STATUSCODE))) {
-            String token = (String) loginRes.get("tk");
+            String token = loginRes.getString("tk");
+            LOGGER.info("token：{}", token);
             JSONObject signRes = Request.get(SIGN, token);
             LOGGER.info("签到结果：{}", signRes);
             stringBuilder.append("\r\n");

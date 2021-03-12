@@ -53,10 +53,10 @@ public class Request {
         CloseableHttpClient client = HttpClients.createDefault();
 
         HttpGet httpGet = new HttpGet(url);
-        LOGGER.info("请求地址：{}", url);
-        httpGet.addHeader("connection", "keep-alive");
-        httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
-        httpGet.addHeader("charset", "UTF-8");
+//        LOGGER.info("请求地址：{}", url);
+//        httpGet.addHeader("connection", "keep-alive");
+//        httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
+//        httpGet.addHeader("charset", "UTF-8");
         httpGet.setHeader("BIGAN_LOGIN_TOKEN", token);
         httpGet.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36");
         HttpResponse resp = null;
