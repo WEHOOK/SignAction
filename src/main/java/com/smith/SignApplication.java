@@ -8,6 +8,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -61,10 +62,11 @@ public class SignApplication {
         parameters.add(new BasicNameValuePair("nextAutoLogin", "0"));
         parameters.add(new BasicNameValuePair("account", account[0]));
         parameters.add(new BasicNameValuePair("pass", account[1]));
+        CloseableHttpClient client = HttpClients.createDefault();
 
 
         JSONObject loginRes = Request.post(LOGIN,
-                parameters);
+                parameters, client);
         LOGGER.info("登录结果：{}", loginRes);
 
         if (SUCCESSCODE.equals(loginRes.get(STATUSCODE))) {
@@ -72,7 +74,7 @@ public class SignApplication {
             JSONObject dataObject = JSONObject.parseObject(loginRes.getString("data"));
             String token = dataObject.getString(TOKEN);
 
-            JSONObject signRes = Request.get(SIGN, token);
+            JSONObject signRes = Request.get(SIGN, token, client);
             LOGGER.info("签到结果：{}", signRes);
             stringBuilder.append("\r\n");
             stringBuilder.append("账号" + account[0] + "登录成功");

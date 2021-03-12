@@ -48,9 +48,9 @@ public class Request {
      * @author srcrs
      * @Time 2020-10-31
      */
-    public static JSONObject get(String url, String token) {
+    public static JSONObject get(String url, String token,CloseableHttpClient client) {
 
-        CloseableHttpClient client = HttpClients.createDefault();
+
 
         HttpGet httpGet = new HttpGet(url);
 //        LOGGER.info("请求地址：{}", url);
@@ -60,7 +60,6 @@ public class Request {
         LOGGER.info("token：{}", token);
         httpGet.setHeader("BIGAN_LOGIN_TOKEN", token);
         httpGet.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36");
-        LOGGER.info("请求：{}",httpGet);
         HttpResponse resp = null;
         String respContent = null;
         try {
@@ -88,9 +87,9 @@ public class Request {
      * @author srcrs
      * @Time 2020-10-31
      */
-    public static JSONObject post(String url, List<NameValuePair> body) throws UnsupportedEncodingException {
+    public static JSONObject post(String url, List<NameValuePair> body,CloseableHttpClient client) throws UnsupportedEncodingException {
         UrlEncodedFormEntity entityBody = new UrlEncodedFormEntity(body, "UTF-8");
-        CloseableHttpClient client = HttpClients.createDefault();
+//        CloseableHttpClient client = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url + System.currentTimeMillis());
         LOGGER.info("请求地址：{}", url + System.currentTimeMillis());
         httpPost.addHeader("connection", "keep-alive");
