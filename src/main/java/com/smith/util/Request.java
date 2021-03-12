@@ -48,7 +48,7 @@ public class Request {
     public static JSONObject get(String url, String token, CloseableHttpClient client) {
 
         HttpGet httpGet = new HttpGet(url);
-        LOGGER.info("token：{}", token);
+//        LOGGER.info("token：{}", token);
         httpGet.setHeader("BIGAN_LOGIN_TOKEN", token);
         httpGet.addHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36");
         HttpResponse resp = null;

@@ -67,17 +67,21 @@ public class SignApplication {
         JSONObject loginRes = Request.post(LOGIN,
                 parameters, client);
         if (SUCCESSCODE.equals(loginRes.get(STATUSCODE))) {
+            LOGGER.info("{}登录成功",account[0]);
 
             JSONObject dataObject = JSONObject.parseObject(loginRes.getString("data"));
             String token = dataObject.getString(TOKEN);
 
             JSONObject signRes = Request.get(SIGN, token, client);
+
+            LOGGER.info("账号：{}，签到结果：{}", account[0], signRes);
             stringBuilder.append("\r\n");
             stringBuilder.append("账号" + account[0] + "登录成功");
             stringBuilder.append("\r\n");
             stringBuilder.append("签到结果" + signRes);
             stringBuilder.append("\r\n");
         } else {
+            LOGGER.info("{}登录失败",account[0]);
             stringBuilder.append("\r\n");
             stringBuilder.append("账号" + account[0] + "登录失败");
             stringBuilder.append("\r\n");
