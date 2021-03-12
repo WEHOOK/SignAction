@@ -50,6 +50,7 @@ public class SignApplication {
         }
         signApplication.send(sckey);
 
+
     }
 
     public void sign(String s, String LOGIN, String SIGN) throws UnsupportedEncodingException {
@@ -67,7 +68,9 @@ public class SignApplication {
         LOGGER.info("登录结果：{}", loginRes);
 
         if (SUCCESSCODE.equals(loginRes.get(STATUSCODE))) {
-            String token = loginRes.getString(TOKEN);
+
+            JSONObject dataObject = JSONObject.parseObject(loginRes.getString("data"));
+            String token = dataObject.getString(TOKEN);
             LOGGER.info("token：{}", token);
             JSONObject signRes = Request.get(SIGN, token);
             LOGGER.info("签到结果：{}", signRes);
