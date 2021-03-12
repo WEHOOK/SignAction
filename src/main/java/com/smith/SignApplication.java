@@ -29,6 +29,7 @@ public class SignApplication {
 
     private static final Integer SUCCESSCODE = 0;
     private static final String STATUSCODE = "code";
+    private static final String TOKEN = "tk";
     StringBuilder stringBuilder = new StringBuilder();
 
     public static void main(String[] args) throws UnsupportedEncodingException {
@@ -66,7 +67,7 @@ public class SignApplication {
         LOGGER.info("登录结果：{}", loginRes);
 
         if (SUCCESSCODE.equals(loginRes.get(STATUSCODE))) {
-            String token = loginRes.getString("tk");
+            String token = loginRes.getString(TOKEN);
             LOGGER.info("token：{}", token);
             JSONObject signRes = Request.get(SIGN, token);
             LOGGER.info("签到结果：{}", signRes);
