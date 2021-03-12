@@ -60,7 +60,7 @@ public class SignApplication {
         parameters.add(new BasicNameValuePair("pass", account[1]));
 
         LOGGER.info("当前时间戳：{}",System.currentTimeMillis());
-        JSONObject loginRes = Request.post(LOGIN + System.currentTimeMillis(),
+        JSONObject loginRes = Request.post(LOGIN ,
                 parameters.toString());
         LOGGER.info("登录结果：{}", loginRes);
 

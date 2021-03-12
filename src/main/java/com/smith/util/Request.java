@@ -50,6 +50,7 @@ public class Request {
         CloseableHttpClient client = HttpClients.createDefault();
 
         HttpGet httpGet = new HttpGet(url);
+        LOGGER.info("请求地址：{}", url);
         httpGet.addHeader("connection", "keep-alive");
         httpGet.addHeader("Content-Type", "application/x-www-form-urlencoded");
         httpGet.addHeader("charset", "UTF-8");
@@ -88,7 +89,8 @@ public class Request {
 //        RequestConfig defaultConfig = RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build();
 //        HttpClient client = HttpClients.custom().setDefaultRequestConfig(defaultConfig).build();
         CloseableHttpClient client = HttpClients.createDefault();
-        HttpPost httpPost = new HttpPost(url);
+        HttpPost httpPost = new HttpPost(url + System.currentTimeMillis());
+        LOGGER.info("请求地址：{}", url+ System.currentTimeMillis());
         httpPost.addHeader("connection", "keep-alive");
 //        httpPost.addHeader("Host","www.bigan.net");
         httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
