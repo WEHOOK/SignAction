@@ -66,7 +66,7 @@ public class SignApplication {
         LOGGER.info("登录结果：{}", loginRes);
 
         if (SUCCESSCODE.equals(loginRes.get(STATUSCODE))) {
-            String token = loginRes.getString("tk");
+            String token = (String) loginRes.get("tk");
             JSONObject signRes = Request.get(SIGN, token);
             LOGGER.info("签到结果：{}", signRes);
             stringBuilder.append("\r\n");
